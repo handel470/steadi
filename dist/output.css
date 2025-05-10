@@ -1359,3 +1359,15 @@ video {
     transition-property: none;
   }
 }
+
+.responsivemod {
+  margin-top: 1rem;
+}
+
+@media screen and (min-width: 500px) {
+  .responsivemod {
+    margin-top:auto;
+    margin-bottom:auto;
+    /*max-width: 500px; for <= 500px on desktop */
+  }
+}
