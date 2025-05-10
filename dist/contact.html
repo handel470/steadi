@@ -14,6 +14,13 @@
   <link rel="stylesheet" href="styles.css" />
   <!-- Alpine.js -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() {
+      emailjs.init("3Dg-P8_oBoIV522el"); // Replace with your EmailJS public key
+    })();
+  </script>
   <!-- Start - Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -85,25 +92,25 @@
       <section class="col-span-2 md:col-span-1">
         <h1 class="text-4xl pt-10 pb-8"><b>CONTACT</b></h1>
         <div class="m-6 md:m-12">
-          <form class="space-y-8" action="mailto:inquiries@kirahandel.com">
+          <form class="space-y-8" id="contact-form" onsubmit="return sendEmail(event)">
             <div>
               <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your
                 email</label>
-              <input type="email" id="email"
+              <input type="email" id="email" name="email"
                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-neutral-900 dark:border-neutral-800 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
                 placeholder="example@gmail.com" required />
             </div>
             <div>
               <label for="subject"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
-              <input type="text" id="subject"
+              <input type="text" id="subject" name="subject"
                 class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-neutral-900 dark:border-neutral-800 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
                 placeholder="What brought you here?" required />
             </div>
             <div class="sm:col-span-2">
               <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your
                 message</label>
-              <textarea id="message" rows="6"
+              <textarea id="message" name="message" rows="6"
                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-neutral-900 dark:border-neutral-800 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Tell me more about your project!" required></textarea>
             </div>
@@ -141,6 +148,27 @@
     </footer>
   <script src="fade_in.js"></script>
   <script src="menu.js"></script>
+  <script>
+    function sendEmail(e) {
+      e.preventDefault();
+      
+      const templateParams = {
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+      };
+
+      emailjs.send('service_cdja0dv', 'template_9y3z93a', templateParams)
+        .then(function(response) {
+          alert('Message sent successfully!');
+          document.getElementById('contact-form').reset();
+        }, function(error) {
+          alert('Failed to send message. Please try again.');
+        });
+
+      return false;
+    }
+  </script>
 </body>
 
 </html>
