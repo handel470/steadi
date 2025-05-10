@@ -1360,14 +1360,24 @@ video {
   }
 }
 
-.responsivemod {
+.responsivegear {
   margin-top: 1rem;
 }
 
 @media screen and (min-width: 500px) {
-  .responsivemod {
+  .responsivegear {
     margin-top:auto;
     margin-bottom:auto;
     /*max-width: 500px; for <= 500px on desktop */
+  }
+}
+
+.responsivecontact {
+  padding-top: 1.75rem;
+}
+
+@media screen and (min-width: 500px) {
+  .responsivecontact {
+    padding-top:3rem;
   }
 }
